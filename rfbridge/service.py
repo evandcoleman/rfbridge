@@ -24,7 +24,7 @@ class Service:
         )
         self.zeroconf.register_service(info)
 
-    def get_open_hostname_port():
+    def get_open_hostname_port(self):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind(("",0))
         hostname = socket.gethostname()
