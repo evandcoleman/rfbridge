@@ -14,7 +14,7 @@ class Service:
         self.zeroconf = Zeroconf()
 
     def advertise(self):
-        hostname, port = get_open_port()
+        hostname, port = self.get_open_port()
         desc = {'service': 'RF Bridge', 'version': '1.0.0'}
         info = ServiceInfo(
             "_rfbridge._tcp.local.",
