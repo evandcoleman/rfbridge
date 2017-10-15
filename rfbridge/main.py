@@ -7,6 +7,7 @@ import argparse
 import sys
 import logging
 
+import rfbridge
 from rfbridge import __version__, Service
 
 __author__ = "Evan Coleman"
