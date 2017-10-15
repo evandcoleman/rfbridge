@@ -8,7 +8,7 @@ from zeroconf import ServiceInfo, Zeroconf
 
 _logger = logging.getLogger(__name__)
 
-class Service:
+class Advertise:
 
     def __init__(self):
         self.zeroconf = Zeroconf()
@@ -21,7 +21,7 @@ class Service:
         s.close()
         return hostname, port
 
-    def advertise(self):
+    def start(self):
         hostname, port = self.get_hostname_port()
         desc = {'service': 'RF Bridge', 'version': '1.0.0'}
         info = ServiceInfo(

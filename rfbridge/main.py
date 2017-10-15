@@ -8,7 +8,7 @@ import sys
 import logging
 
 from rfbridge import __version__
-from rfbridge.service import Service
+from rfbridge.advertise import Advertise
 
 __author__ = "Evan Coleman"
 __copyright__ = "Evan Coleman"
@@ -62,7 +62,7 @@ def main(args):
     setup_logging(args.loglevel)
     _logger.debug("Advertising service...")
     
-    Service().advertise()
+    Advertise().start()
 
     _logger.info("Exiting...")
 
