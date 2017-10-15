@@ -8,7 +8,7 @@ import sys
 import logging
 
 from rfbridge import __version__
-from server import Service
+from service import Service
 
 __author__ = "Evan Coleman"
 __copyright__ = "Evan Coleman"
