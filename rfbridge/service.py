@@ -13,6 +13,14 @@ class Service:
     def __init__(self):
         self.zeroconf = Zeroconf()
 
+    def get_hostname_port(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind(("",0))
+        hostname = socket.gethostname()
+        port = s.getsockname()[1]
+        s.close()
+        return hostname, port
+
     def advertise(self):
         hostname, port = self.get_hostname_port()
         desc = {'service': 'RF Bridge', 'version': '1.0.0'}
@@ -23,11 +31,3 @@ class Service:
             desc, hostname + ".local."
         )
         self.zeroconf.register_service(info)
-
-    def get_hostname_port(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind(("",0))
-        hostname = socket.gethostname()
-        port = s.getsockname()[1]
-        s.close()
-        return hostname, port
