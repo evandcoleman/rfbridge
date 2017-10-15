@@ -7,8 +7,8 @@ import argparse
 import sys
 import logging
 
-import rfbridge
-from rfbridge import __version__, Service
+from rfbridge import __version__
+from rfbridge import Service
 
 __author__ = "Evan Coleman"
 __copyright__ = "Evan Coleman"
