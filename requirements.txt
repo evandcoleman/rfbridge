@@ -2,3 +2,4 @@
 # numpy
 # scipy>=0.9
 
+zeroconf==0.19.1
