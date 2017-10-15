@@ -11,7 +11,6 @@ _logger = logging.getLogger(__name__)
 class Service:
 
     def __init__(self):
-        self.name = name
         self.zeroconf = Zeroconf()
 
     def advertise(self):
@@ -19,7 +18,7 @@ class Service:
         desc = {'service': 'RF Bridge', 'version': '1.0.0'}
         info = ServiceInfo(
             "_rfbridge._tcp.local.",
-            self.name + "._rfbridge._tcp.local.",
+            hostname + "._rfbridge._tcp.local.",
             socket.inet_aton("127.0.0.1"), port, 0, 0,
             desc, hostname + ".local."
         )
