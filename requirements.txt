@@ -3,5 +3,5 @@
 # scipy>=0.9
 
 zeroconf==0.19.1
--e git://github.com/atlas0fd00m/rfcat.git@53b26b41a77b838adfce1b64dadf14083e2dd7d0
+-e git://github.com/atlas0fd00m/rfcat.gi#egg=rflibt@53b26b41a77b838adfce1b64dadf14083e2dd7d0
 websocket-server==0.4
