@@ -7,3 +7,6 @@ zeroconf==0.19.1
 websocket-server==0.4
 libusb1==1.6.4
 pyusb==1.0.0
+Adafruit-GPIO==1.0.3
+adafruit-mcp3008==1.0.2
+adafruit-pureio==0.2.1
