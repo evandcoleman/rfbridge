@@ -5,3 +5,5 @@
 zeroconf==0.19.1
 -e git+https://github.com/atlas0fd00m/rfcat.git@53b26b41a77b838adfce1b64dadf14083e2dd7d0#egg=rflib
 websocket-server==0.4
+libusb1==1.6.4
+pyusb==1.0.0
