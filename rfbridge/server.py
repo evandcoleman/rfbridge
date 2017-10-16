@@ -15,4 +15,4 @@ class Server:
         self.server.run_forever()
 
     def message_received(self, client, server, message):
-        server.send_message_to_all("Hey all, a new client has joined us")
+        __logger.info(message)
