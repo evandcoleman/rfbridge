@@ -9,6 +9,8 @@ import logging
 
 from rfbridge import __version__
 from rfbridge.advertise import Advertise
+from rfbridge.transmit import Transmitter
+from rfbridge.server import Server
 
 __author__ = "Evan Coleman"
 __copyright__ = "Evan Coleman"
@@ -62,7 +64,9 @@ def main(args):
     setup_logging(args.loglevel)
     _logger.debug("Advertising service...")
     
-    Advertise().start()
+    advertiser = Advertise()
+    advertiser.start()
+    server = Server(port=advertiser.port)
 
     _logger.info("Exiting...")
 

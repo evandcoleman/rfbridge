@@ -23,6 +23,7 @@ class Advertise:
 
     def start(self):
         hostname, port = self.get_hostname_port()
+        self.port = port
         desc = {'service': 'RF Bridge', 'version': '1.0.0'}
         info = ServiceInfo(
             "_rfbridge._tcp.local.",

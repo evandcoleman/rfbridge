@@ -3,3 +3,5 @@
 # scipy>=0.9
 
 zeroconf==0.19.1
+rfcat==1.0
+websocket-server==0.4
