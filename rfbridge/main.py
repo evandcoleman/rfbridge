@@ -11,6 +11,7 @@ from rfbridge import __version__
 from rfbridge.advertise import Advertise
 from rfbridge.transmit import Transmitter
 from rfbridge.server import Server
+from rfbridge.sensor import Sensor
 
 __author__ = "Evan Coleman"
 __copyright__ = "Evan Coleman"
@@ -67,6 +68,7 @@ def main(args):
     advertiser = Advertise()
     advertiser.start()
     server = Server(port=advertiser.port)
+    sensor = Sensor()
 
     _logger.info("Exiting...")
 
