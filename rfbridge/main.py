@@ -63,7 +63,7 @@ def main(args):
     """
     args = parse_args(args)
     setup_logging(args.loglevel)
-    _logger.debug("Advertising service...")
+    _logger.info("Advertising service...")
     
     advertiser = Advertise()
     advertiser.start()
