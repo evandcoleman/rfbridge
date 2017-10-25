@@ -21,3 +21,6 @@ class Server:
 
     def message_received(self, client, server, message):
         _logger.info(message)
+
+    def send_message(self, message):
+        self.server.send_message_to_all(message)

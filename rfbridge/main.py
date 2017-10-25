@@ -69,6 +69,7 @@ def main(args):
     advertiser.start()
     server = Server(port=advertiser.port)
     sensor = Sensor()
+    sensor.set_callback(server.send_message)
 
     _logger.info("Exiting...")
 
