@@ -3,6 +3,7 @@
 
 import logging
 import socket
+import threading
 
 from websocket_server import WebsocketServer
 
@@ -14,6 +15,8 @@ class Server:
         self.server = WebsocketServer(port, host="0.0.0.0")
         self.server.set_fn_new_client(self.new_client)
         self.server.set_fn_message_received(self.message_received)
+    
+    def start(self):
         self.server.run_forever()
 
     def new_client(self, client, server):
