@@ -14,12 +14,12 @@ class Advertise:
         self.zeroconf = Zeroconf()
 
     def get_hostname_port(self):
-        # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # s.bind(("",0))
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind(("",0))
         hostname = socket.gethostname()
-        # port = s.getsockname()[1]
-        # s.close()
-        return hostname, 43145
+        port = s.getsockname()[1]
+        s.close()
+        return hostname, port
 
     def start(self):
         hostname, port = self.get_hostname_port()
@@ -28,7 +28,7 @@ class Advertise:
         info = ServiceInfo(
             "_rfbridge._tcp.local.",
             hostname + "._rfbridge._tcp.local.",
-            socket.gethostbyname(socket.gethostname()), port, 0, 0,
+            socket.inet_aton("0.0.0.0"), port, 0, 0,
             desc, hostname + ".local."
         )
         self.zeroconf.register_service(info)
