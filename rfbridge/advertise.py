@@ -14,13 +14,12 @@ class Advertise:
         self.zeroconf = Zeroconf()
 
     def get_hostname_port(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind(("",0))
+        # s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # s.bind(("",0))
         hostname = socket.gethostname()
-        port = s.getsockname()[1]
-        s.shutdown(socket.SHUT_RDWR)
-        s.close()
-        return hostname, port
+        # port = s.getsockname()[1]
+        # s.close()
+        return hostname, 43145
 
     def start(self):
         hostname, port = self.get_hostname_port()
