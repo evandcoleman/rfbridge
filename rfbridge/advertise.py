@@ -18,6 +18,7 @@ class Advertise:
         s.bind(("",0))
         hostname = socket.gethostname()
         port = s.getsockname()[1]
+        s.shutdown(socket.SHUT_RDWR)
         s.close()
         return hostname, port
 
