@@ -21,6 +21,7 @@ class Sensor:
         self.callback = callback
 
     def read_sensors(self):
+        _logger.info("Reading sensors...")
         # Read all the ADC channel values in a list.
         values = [0]*8
         for i in range(8):
