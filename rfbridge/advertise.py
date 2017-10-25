@@ -28,7 +28,7 @@ class Advertise:
         info = ServiceInfo(
             "_rfbridge._tcp.local.",
             hostname + "._rfbridge._tcp.local.",
-            socket.gethostbyname(socket.getfqdn()), port, 0, 0,
+            socket.getfqdn(), port, 0, 0,
             desc, hostname + ".local."
         )
         self.zeroconf.register_service(info)
