@@ -12,8 +12,12 @@ class Server:
 
     def __init__(self, port):
         self.server = WebsocketServer(port, host=socket.gethostname())
+        self.server.set_fn_new_client(self.new_client)
         self.server.set_fn_message_received(self.message_received)
         self.server.run_forever()
+
+    def new_client(self, client, server):
+        __logger.info(message)
 
     def message_received(self, client, server, message):
         __logger.info(message)
