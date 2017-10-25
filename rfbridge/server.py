@@ -17,7 +17,7 @@ class Server:
         self.server.run_forever()
 
     def new_client(self, client, server):
-        __logger.info(message)
+        _logger.info(client)
 
     def message_received(self, client, server, message):
-        __logger.info(message)
+        _logger.info(message)
