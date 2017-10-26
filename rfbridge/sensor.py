@@ -3,6 +3,7 @@
 
 import logging
 import threading
+import time
 import Adafruit_MCP3008
 
 from threading import Thread
@@ -22,7 +23,7 @@ class Sensor(Thread):
     def run(self):
         while True:
             self.read_sensors()
-            sleep(2)
+            time.sleep(2)
 
     def set_callback(self, callback):
         self.callback = callback
