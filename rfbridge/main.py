@@ -6,6 +6,7 @@ from __future__ import division, print_function, absolute_import
 import argparse
 import sys
 import logging
+import threading
 
 from rfbridge import __version__
 from rfbridge.advertise import Advertise
@@ -69,8 +70,9 @@ def main(args):
     advertiser.start()
     server = Server(port=advertiser.port)
     sensor = Sensor()
-    # sensor.set_callback(server.send_message)
-    # server.start()
+    sensor.set_callback(server.send_message)
+    threading.Thread(target=sensor.start).run()
+    server.start()
 
     _logger.info("Exiting...")
 

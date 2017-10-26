@@ -15,6 +15,8 @@ class Sensor:
 
     def __init__(self):
         self.mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
+
+    def start(self):
         threading.Timer(2, self.read_sensors).start()
 
     def set_callback(self, callback):
