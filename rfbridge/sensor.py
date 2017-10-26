@@ -5,6 +5,8 @@ import logging
 import threading
 import Adafruit_MCP3008
 
+from threading import Thread
+
 _logger = logging.getLogger(__name__)
 CLK  = 18
 MISO = 23
