@@ -4,8 +4,12 @@
 import json
 
 class Message:
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, messageType, data):
+        self.type = messageType
+        self.data = data
 
-    # def as_json(self):
-
+    def as_json(self):
+        return json.dumps({
+            'type': self.type,
+            'data': self.data
+        })

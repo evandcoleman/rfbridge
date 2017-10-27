@@ -6,7 +6,6 @@ from __future__ import division, print_function, absolute_import
 import argparse
 import sys
 import logging
-import threading
 
 from rfbridge import __version__
 from rfbridge.advertise import Advertise
@@ -30,7 +29,7 @@ def parse_args(args):
       :obj:`argparse.Namespace`: command line parameters namespace
     """
     parser = argparse.ArgumentParser(
-        description="Bridge RF commands to a ceiling fan with an ACS217 and Yardstick ONE")
+        description="Bridge RF commands to a ceiling fan with an ACS712 and Yardstick ONE")
     parser.add_argument(
         '--version',
         action='version',
@@ -68,10 +67,7 @@ def main(args):
     
     advertiser = Advertise()
     advertiser.start()
-    server = Server(port=advertiser.port)
-    sensor = Sensor()
-    sensor.set_callback(server.send_message)
-    threading.Thread(target=sensor.start).run()
+    server = Server(port=advertiser.port, sensor=Sensor())
     server.start()
 
     _logger.info("Exiting...")

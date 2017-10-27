@@ -25,8 +25,11 @@ class Sensor(Thread):
             self.read_sensors()
             time.sleep(2)
 
-    def set_callback(self, callback):
-        self.callback = callback
+    def set_fn_light_changed(self, callback):
+        self.on_light_changed = callback
+
+    def set_fn_motor_changed(self, callback):
+        self.on_motor_changed = callback
 
     def read_sensors(self):
         _logger.info("Reading sensors...")
@@ -36,5 +39,6 @@ class Sensor(Thread):
             # The read_adc function will get the value of the specified channel (0-7).
             values[i] = self.mcp.read_adc(i)
         # Print the ADC values.
-        self.callback('| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values))
+        # '| {0:>4} | {1:>4} | {2:>4} | {3:>4} | {4:>4} | {5:>4} | {6:>4} | {7:>4} |'.format(*values)
+        # self.callback(values)
         # Pause for half a second.
