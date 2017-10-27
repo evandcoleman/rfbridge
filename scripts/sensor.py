@@ -17,7 +17,9 @@ channel = results.channel
 
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 value = 0
+print "Reading 50000 samples"
 for i in range(50000):
+  print "Reading sample " + str(i)
   value = value + mcp.read_adc(channel)
 avg = value / 50000
 print math.sqrt(avg)
