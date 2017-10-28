@@ -17,9 +17,9 @@ results = parser.parse_args()
 channel = results.channel
 
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
-interval = 20000
+interval = 0.02
 num_samples = 5000
-sample_time = 100000000
+sample_time = 100
 adc_zero = 513
 prev_time = time.time() - interval
 values = [0]*num_samples
