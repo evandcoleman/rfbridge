@@ -4,6 +4,7 @@
 import argparse
 import Adafruit_MCP3008
 import math
+import time
 
 CLK  = 18
 MISO = 23
@@ -16,10 +17,23 @@ results = parser.parse_args()
 channel = results.channel
 
 mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
-value = 0
-print "Reading 50000 samples"
-for i in range(50000):
+interval = 20000
+num_samples = 5000
+sample_time = 100000000
+adc_zero = 513
+prev_time = time.time() - interval
+values = [0]*num_samples
+i = 0
+accumulated = 0
+print "Reading samples"
+while i < num_samples:
   print "Reading sample " + str(i)
-  value = value + mcp.read_adc(channel)
-avg = value / 50000
-print math.sqrt(avg)
+  if time.time() - prev_time >= interval:
+    values[i] = mcp.read_adc(channel)
+    accumulated = accumulated + (values[i]-adc_zero)*(values[i]-adc_zero)
+    ++i
+    prev_time += interval
+avg = accumulated / num_samples
+current = math.sqrt(avg)
+amps = current / (185 / 4.89)
+print "Current reading of " + str(amps) + " amps (" + str(current) + ")"
