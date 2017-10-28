@@ -27,8 +27,10 @@ i = 0
 accumulated = 0
 print "Reading samples"
 while i < num_samples:
-  print "Reading sample " + str(i) + " | " + str(time.time() - prev_time)
-  if time.time() - prev_time >= interval:
+  change = time.time() - prev_time
+  print str(change)
+  if change >= interval:
+    print "Reading sample " + str(i)
     values[i] = mcp.read_adc(channel)
     accumulated = accumulated + (values[i]-adc_zero)*(values[i]-adc_zero)
     ++i
