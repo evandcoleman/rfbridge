@@ -33,7 +33,7 @@ while i < num_samples:
     print "Reading sample " + str(i)
     values[i] = mcp.read_adc(channel)
     accumulated = accumulated + (values[i]-adc_zero)*(values[i]-adc_zero)
-    ++i
+    i = i + 1
     prev_time += interval
 avg = accumulated / num_samples
 current = math.sqrt(avg)
