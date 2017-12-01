@@ -34,3 +34,6 @@ class Advertise:
             desc, hostname + ".local."
         )
         self.zeroconf.register_service(info)
+
+    def stop(self):
+        self.zeroconf.unregisterAllServices()

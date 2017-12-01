@@ -97,6 +97,7 @@ def main(args):
             while True:
                 time.sleep(86400)
         except KeyboardInterrupt:
+            advertiser.stop()
             server.stop()
             sys.exit()
     else:
