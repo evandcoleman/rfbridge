@@ -25,10 +25,12 @@ class Advertise:
         hostname, port = self.get_hostname_port()
         self.port = port
         desc = {'service': 'RF Bridge', 'version': '0.0.1'}
+        fqdn = socket.gethostname()
+        ip_addr = socket.gethostbyname(fqdn)
         info = ServiceInfo(
             "_rfbridge._tcp.local.",
             hostname + "._rfbridge._tcp.local.",
-            socket.inet_aton("0.0.0.0"), port, 0, 0,
+            socket.inet_aton(ip_addr), port, 0, 0,
             desc, hostname + ".local."
         )
         self.zeroconf.register_service(info)

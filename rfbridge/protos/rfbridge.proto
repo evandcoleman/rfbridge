@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package rfbridge;
+
+service RFBridge {
+  rpc SendCommand(CommandRequest) returns (CommandResponse) {}
+}
+
+enum Command {
+  LIGHT = 0;
+  STOP = 1;
+  SLOW = 2;
+  MEDIUM = 3;
+  FAST = 4;
+  REVERSE = 5;
+}
+
+message CommandRequest {
+  Command command = 1;
+}
+
+message CommandResponse {
+
+}

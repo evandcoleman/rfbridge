@@ -18,11 +18,11 @@ class Sensor(Thread):
 
     def __init__(self):
         Thread.__init__(self)
-        self.mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
+        # self.mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
 
     def run(self):
         while True:
-            self.read_sensors()
+            # self.read_sensors()
             time.sleep(2)
 
     def set_fn_light_changed(self, callback):

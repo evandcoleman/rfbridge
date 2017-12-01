@@ -6,12 +6,14 @@ from __future__ import division, print_function, absolute_import
 import argparse
 import sys
 import logging
+import time
 
 from rfbridge import __version__
 from rfbridge.advertise import Advertise
-from rfbridge.transmit import Transmitter
+from rfbridge.transmitter import Transmitter
 from rfbridge.server import Server
 from rfbridge.sensor import Sensor
+from rfbridge.devices import devices
 
 __author__ = "Evan Coleman"
 __copyright__ = "Evan Coleman"
@@ -31,16 +33,34 @@ def parse_args(args):
     parser = argparse.ArgumentParser(
         description="Bridge RF commands to a ceiling fan with an ACS712 and Yardstick ONE")
     parser.add_argument(
+        '--device',
+        action="store",
+        dest="device_id",
+        help='The identifier of the device to bridge',
+        type=str
+    )
+    parser.add_argument(
+        '--command',
+        action="store",
+        dest="command",
+        help='The command to send',
+        type=str
+    )
+    parser.add_argument('--bridge', dest='bridge', action='store_true')
+    parser.add_argument(
         '--version',
         action='version',
-        version='rfbridge {ver}'.format(ver=__version__))
+        version='rfbridge {ver}'.format(ver=__version__)
+    )
     parser.add_argument(
         '-v',
         '--verbose',
         dest="loglevel",
         help="set loglevel to INFO",
         action='store_const',
-        const=logging.INFO)
+        const=logging.INFO
+    )
+    parser.set_defaults(bridge=False)
     return parser.parse_args(args)
 
 
@@ -63,12 +83,25 @@ def main(args):
     """
     args = parse_args(args)
     setup_logging(args.loglevel)
-    _logger.info("Advertising service...")
-    
-    advertiser = Advertise()
-    advertiser.start()
-    server = Server(port=advertiser.port, sensor=Sensor())
-    server.start()
+    device = devices.devices[args.device_id]
+    tx = Transmitter(config=device)
+
+    if args.bridge:
+        _logger.info("Advertising service...")
+        advertiser = Advertise()
+        advertiser.start()
+        _logger.info("Advertised at port: " + str(advertiser.port))
+        server = Server(port=advertiser.port, sensor=Sensor(), tx=tx)
+        server.start()
+        try:
+            while True:
+                time.sleep(86400)
+        except KeyboardInterrupt:
+            server.stop()
+            sys.exit()
+    else:
+        command = args.command
+        tx.xmit(cmd=command)
 
     _logger.info("Exiting...")
 

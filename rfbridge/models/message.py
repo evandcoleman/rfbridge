@@ -4,6 +4,11 @@
 import json
 
 class Message:
+    messageType = dict(
+        status = 'status',
+        command = 'command'
+    )
+
     def __init__(self, messageType, data):
         self.type = messageType
         self.data = data

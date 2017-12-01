@@ -2,44 +2,54 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import socket
 import threading
-
-from websocket_server import WebsocketServer
+from concurrent import futures
+import grpc
+from protos import rfbridge_pb2, rfbridge_pb2_grpc
 
 _logger = logging.getLogger(__name__)
 
-class Server:
+class Server(rfbridge_pb2_grpc.RFBridgeServicer):
 
-    def __init__(self, port, sensor):
-        self.server = WebsocketServer(port, host="0.0.0.0")
-        self.server.set_fn_message_received(self.message_received)
+    def __init__(self, port, sensor, tx):
+        self.port = port
         self.sensor = sensor
         self.sensor.set_fn_light_changed(self.light_changed)
         self.sensor.set_fn_motor_changed(self.motor_changed)
+        self.tx = tx
     
     def start(self):
         threading.Thread(target=self.sensor.start).run()
-        self.server.run_forever()
+        self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        rfbridge_pb2_grpc.add_RFBridgeServicer_to_server(self, self.server)
+        self.server.add_insecure_port("[::]:" + str(self.port))
+        self.server.start()
 
-    def new_client(self, client, server):
-        _logger.info("Client connected")
-        try:
-            self.send_status()
+    def stop(self):
+        self.server.stop(0)
 
-    def message_received(self, client, server, message):
-        _logger.info(message)
+    def SendCommand(self, request, context):
+        response = rfbridge_pb2.CommandResponse()
 
-    def send_message(self, message):
-        self.server.send_message_to_all(message.as_json())
+        if request.command == rfbridge_pb2.Command.Value("LIGHT"):
+            self.tx.xmit(cmd="light")
+        elif request.command == rfbridge_pb2.Command.Value("STOP"):
+            self.tx.xmit(cmd="stop")
+        elif request.command == rfbridge_pb2.Command.Value("SLOW"):
+            self.tx.xmit(cmd="slow")
+        elif request.command == rfbridge_pb2.Command.Value("MEDIUM"):
+            self.tx.xmit(cmd="medium")
+        elif request.command == rfbridge_pb2.Command.Value("FAST"):
+            self.tx.xmit(cmd="fast")
+        elif request.command == rfbridge_pb2.Command.Value("REVERSE"):
+            self.tx.xmit(cmd="reverse")
 
-    def send_status(self):
-        self.send_message(Message('status', self.last_status.as_json()))
+        return response
 
     def light_changed(self, status):
         self.last_status = status
-        self.send_status()
+        # self.send_status()
 
     def motor_changed(self, status):
         self.last_status = status
-        self.send_status()
+        # self.send_status()
