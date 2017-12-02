@@ -47,7 +47,13 @@ def parse_args(args):
         help='The command to send',
         type=str
     )
-    parser.add_argument('--bridge', dest='bridge', action='store_true')
+    parser.add_argument(
+        '--bridge',
+        action="store",
+        dest="bridge_name",
+        help='The name of this bridge',
+        type=str
+    )
     parser.add_argument(
         '--version',
         action='version',
@@ -89,7 +95,7 @@ def main(args):
 
     if args.bridge:
         _logger.info("Advertising service...")
-        advertiser = Advertise(name=device.name, device_type='fan')
+        advertiser = Advertise(name=args.bridge, device_type='fan')
         advertiser.start()
         _logger.info("Advertised at port: " + str(advertiser.port))
         server = Server(port=advertiser.port, sensor=Sensor(), tx=tx)
