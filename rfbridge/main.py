@@ -88,7 +88,7 @@ def main(args):
 
     if args.bridge:
         _logger.info("Advertising service...")
-        advertiser = Advertise()
+        advertiser = Advertise(name=device.name, device_type='fan')
         advertiser.start()
         _logger.info("Advertised at port: " + str(advertiser.port))
         server = Server(port=advertiser.port, sensor=Sensor(), tx=tx)
@@ -97,7 +97,6 @@ def main(args):
             while True:
                 time.sleep(86400)
         except KeyboardInterrupt:
-            advertiser.stop()
             server.stop()
             sys.exit()
     else:
