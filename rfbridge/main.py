@@ -14,6 +14,7 @@ from rfbridge.transmitter import Transmitter
 from rfbridge.server import Server
 from rfbridge.sensor import Sensor
 from rfbridge.devices import devices
+from rfbridge.protos import rfbridge_pb2, rfbridge_pb2_grpc
 
 __author__ = "Evan Coleman"
 __copyright__ = "Evan Coleman"
