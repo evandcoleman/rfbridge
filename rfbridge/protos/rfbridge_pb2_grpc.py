@@ -19,11 +19,6 @@ class RFBridgeStub(object):
         request_serializer=rfbridge__pb2.CommandRequest.SerializeToString,
         response_deserializer=rfbridge__pb2.CommandResponse.FromString,
         )
-    self.Identify = channel.unary_unary(
-        '/rfbridge.RFBridge/Identify',
-        request_serializer=rfbridge__pb2.IdentityRequest.SerializeToString,
-        response_deserializer=rfbridge__pb2.Identity.FromString,
-        )
 
 
 class RFBridgeServicer(object):
@@ -37,13 +32,6 @@ class RFBridgeServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def Identify(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
 
 def add_RFBridgeServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -51,11 +39,6 @@ def add_RFBridgeServicer_to_server(servicer, server):
           servicer.SendCommand,
           request_deserializer=rfbridge__pb2.CommandRequest.FromString,
           response_serializer=rfbridge__pb2.CommandResponse.SerializeToString,
-      ),
-      'Identify': grpc.unary_unary_rpc_method_handler(
-          servicer.Identify,
-          request_deserializer=rfbridge__pb2.IdentityRequest.FromString,
-          response_serializer=rfbridge__pb2.Identity.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

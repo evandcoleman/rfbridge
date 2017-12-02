@@ -10,7 +10,6 @@ _logger = logging.getLogger(__name__)
 class Transmitter:
 
     def __init__(self, config):
-        self.config = config
         self.commands = config.commands
         self.d = RfCat()
         self.d.setFreq(config.frequency)

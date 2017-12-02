@@ -28,13 +28,6 @@ class Server(rfbridge_pb2_grpc.RFBridgeServicer):
     def stop(self):
         self.server.stop(0)
 
-    def Identify(self, request, context):
-        response = rfbridge_pb2.Identity()
-        response.name = self.tx.config.name
-        response.type = rfbridge_pb2.FAN
-
-        return response
-
     def SendCommand(self, request, context):
         response = rfbridge_pb2.CommandResponse()
 

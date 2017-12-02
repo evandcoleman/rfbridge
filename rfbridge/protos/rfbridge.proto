@@ -4,7 +4,6 @@ package rfbridge;
 
 service RFBridge {
   rpc SendCommand(CommandRequest) returns (CommandResponse) {}
-  rpc Identify(IdentityRequest) returns (Identity) {}
 }
 
 enum Command {
@@ -22,17 +21,4 @@ message CommandRequest {
 
 message CommandResponse {
 
-}
-
-enum Type {
-  FAN = 0;
-}
-
-message IdentityRequest {
-  
-}
-
-message Identity {
-  string name = 1;
-  Type type = 2;
 }

@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='rfbridge.proto',
   package='rfbridge',
   syntax='proto3',
-  serialized_pb=_b('\n\x0erfbridge.proto\x12\x08rfbridge\"4\n\x0e\x43ommandRequest\x12\"\n\x07\x63ommand\x18\x01 \x01(\x0e\x32\x11.rfbridge.Command\"\x11\n\x0f\x43ommandResponse\"\x11\n\x0fIdentityRequest\"6\n\x08Identity\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x1c\n\x04type\x18\x02 \x01(\x0e\x32\x0e.rfbridge.Type*K\n\x07\x43ommand\x12\t\n\x05LIGHT\x10\x00\x12\x08\n\x04STOP\x10\x01\x12\x08\n\x04SLOW\x10\x02\x12\n\n\x06MEDIUM\x10\x03\x12\x08\n\x04\x46\x41ST\x10\x04\x12\x0b\n\x07REVERSE\x10\x05*\x0f\n\x04Type\x12\x07\n\x03\x46\x41N\x10\x00\x32\x8d\x01\n\x08RFBridge\x12\x44\n\x0bSendCommand\x12\x18.rfbridge.CommandRequest\x1a\x19.rfbridge.CommandResponse\"\x00\x12;\n\x08Identify\x12\x19.rfbridge.IdentityRequest\x1a\x12.rfbridge.Identity\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0erfbridge.proto\x12\x08rfbridge\"4\n\x0e\x43ommandRequest\x12\"\n\x07\x63ommand\x18\x01 \x01(\x0e\x32\x11.rfbridge.Command\"\x11\n\x0f\x43ommandResponse*K\n\x07\x43ommand\x12\t\n\x05LIGHT\x10\x00\x12\x08\n\x04STOP\x10\x01\x12\x08\n\x04SLOW\x10\x02\x12\n\n\x06MEDIUM\x10\x03\x12\x08\n\x04\x46\x41ST\x10\x04\x12\x0b\n\x07REVERSE\x10\x05\x32P\n\x08RFBridge\x12\x44\n\x0bSendCommand\x12\x18.rfbridge.CommandRequest\x1a\x19.rfbridge.CommandResponse\"\x00\x62\x06proto3')
 )
 
 _COMMAND = _descriptor.EnumDescriptor(
@@ -56,38 +56,18 @@ _COMMAND = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=176,
-  serialized_end=251,
+  serialized_start=101,
+  serialized_end=176,
 )
 _sym_db.RegisterEnumDescriptor(_COMMAND)
 
 Command = enum_type_wrapper.EnumTypeWrapper(_COMMAND)
-_TYPE = _descriptor.EnumDescriptor(
-  name='Type',
-  full_name='rfbridge.Type',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='FAN', index=0, number=0,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=253,
-  serialized_end=268,
-)
-_sym_db.RegisterEnumDescriptor(_TYPE)
-
-Type = enum_type_wrapper.EnumTypeWrapper(_TYPE)
 LIGHT = 0
 STOP = 1
 SLOW = 2
 MEDIUM = 3
 FAST = 4
 REVERSE = 5
-FAN = 0
 
 
 
@@ -145,76 +125,10 @@ _COMMANDRESPONSE = _descriptor.Descriptor(
   serialized_end=99,
 )
 
-
-_IDENTITYREQUEST = _descriptor.Descriptor(
-  name='IdentityRequest',
-  full_name='rfbridge.IdentityRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=101,
-  serialized_end=118,
-)
-
-
-_IDENTITY = _descriptor.Descriptor(
-  name='Identity',
-  full_name='rfbridge.Identity',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='name', full_name='rfbridge.Identity.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='rfbridge.Identity.type', index=1,
-      number=2, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=120,
-  serialized_end=174,
-)
-
 _COMMANDREQUEST.fields_by_name['command'].enum_type = _COMMAND
-_IDENTITY.fields_by_name['type'].enum_type = _TYPE
 DESCRIPTOR.message_types_by_name['CommandRequest'] = _COMMANDREQUEST
 DESCRIPTOR.message_types_by_name['CommandResponse'] = _COMMANDRESPONSE
-DESCRIPTOR.message_types_by_name['IdentityRequest'] = _IDENTITYREQUEST
-DESCRIPTOR.message_types_by_name['Identity'] = _IDENTITY
 DESCRIPTOR.enum_types_by_name['Command'] = _COMMAND
-DESCRIPTOR.enum_types_by_name['Type'] = _TYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 CommandRequest = _reflection.GeneratedProtocolMessageType('CommandRequest', (_message.Message,), dict(
@@ -231,20 +145,6 @@ CommandResponse = _reflection.GeneratedProtocolMessageType('CommandResponse', (_
   ))
 _sym_db.RegisterMessage(CommandResponse)
 
-IdentityRequest = _reflection.GeneratedProtocolMessageType('IdentityRequest', (_message.Message,), dict(
-  DESCRIPTOR = _IDENTITYREQUEST,
-  __module__ = 'rfbridge_pb2'
-  # @@protoc_insertion_point(class_scope:rfbridge.IdentityRequest)
-  ))
-_sym_db.RegisterMessage(IdentityRequest)
-
-Identity = _reflection.GeneratedProtocolMessageType('Identity', (_message.Message,), dict(
-  DESCRIPTOR = _IDENTITY,
-  __module__ = 'rfbridge_pb2'
-  # @@protoc_insertion_point(class_scope:rfbridge.Identity)
-  ))
-_sym_db.RegisterMessage(Identity)
-
 
 
 _RFBRIDGE = _descriptor.ServiceDescriptor(
@@ -253,8 +153,8 @@ _RFBRIDGE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=271,
-  serialized_end=412,
+  serialized_start=178,
+  serialized_end=258,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendCommand',
@@ -263,15 +163,6 @@ _RFBRIDGE = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_COMMANDREQUEST,
     output_type=_COMMANDRESPONSE,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Identify',
-    full_name='rfbridge.RFBridge.Identify',
-    index=1,
-    containing_service=None,
-    input_type=_IDENTITYREQUEST,
-    output_type=_IDENTITY,
     options=None,
   ),
 ])
