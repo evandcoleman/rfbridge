@@ -31,7 +31,8 @@ class Server(rfbridge_pb2_grpc.RFBridgeServicer):
     def SendCommand(self, request, context):
         response = rfbridge_pb2.CommandResponse()
 
-        self.tx.xmit(cmd=request.EnumValueName(rfbridge_pb2.Command, request.command))
+        name = request.DESCRIPTOR.enums_by_name['command'].enum_type.values_by_number[request.command].name
+        self.tx.xmit(cmd=name)
 
         return response
 
