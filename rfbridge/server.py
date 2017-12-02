@@ -28,21 +28,17 @@ class Server(rfbridge_pb2_grpc.RFBridgeServicer):
     def stop(self):
         self.server.stop(0)
 
+    def Identify(self, request, context):
+        response = rfbridge_pb2.Identity()
+        response.name = self.tx.config.name
+        response.type = rfbridge_pb2.FAN
+
+        return response
+
     def SendCommand(self, request, context):
         response = rfbridge_pb2.CommandResponse()
 
-        if request.command == rfbridge_pb2.Command.Value("LIGHT"):
-            self.tx.xmit(cmd="light")
-        elif request.command == rfbridge_pb2.Command.Value("STOP"):
-            self.tx.xmit(cmd="stop")
-        elif request.command == rfbridge_pb2.Command.Value("SLOW"):
-            self.tx.xmit(cmd="slow")
-        elif request.command == rfbridge_pb2.Command.Value("MEDIUM"):
-            self.tx.xmit(cmd="medium")
-        elif request.command == rfbridge_pb2.Command.Value("FAST"):
-            self.tx.xmit(cmd="fast")
-        elif request.command == rfbridge_pb2.Command.Value("REVERSE"):
-            self.tx.xmit(cmd="reverse")
+        self.tx.xmit(cmd=request.command.name)
 
         return response
 
