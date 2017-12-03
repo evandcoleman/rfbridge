@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='rfbridge.proto',
   package='rfbridge',
   syntax='proto3',
-  serialized_pb=_b('\n\x0erfbridge.proto\x12\x08rfbridge\"4\n\x0e\x43ommandRequest\x12\"\n\x07\x63ommand\x18\x01 \x01(\x0e\x32\x11.rfbridge.Command\"\x11\n\x0f\x43ommandResponse*K\n\x07\x43ommand\x12\t\n\x05LIGHT\x10\x00\x12\x08\n\x04STOP\x10\x01\x12\x08\n\x04SLOW\x10\x02\x12\n\n\x06MEDIUM\x10\x03\x12\x08\n\x04\x46\x41ST\x10\x04\x12\x0b\n\x07REVERSE\x10\x05\x32P\n\x08RFBridge\x12\x44\n\x0bSendCommand\x12\x18.rfbridge.CommandRequest\x1a\x19.rfbridge.CommandResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0erfbridge.proto\x12\x08rfbridge\"C\n\x0e\x43ommandRequest\x12\"\n\x07\x63ommand\x18\x01 \x01(\x0e\x32\x11.rfbridge.Command\x12\r\n\x05times\x18\x02 \x01(\x05\"\x11\n\x0f\x43ommandResponse*K\n\x07\x43ommand\x12\t\n\x05LIGHT\x10\x00\x12\x08\n\x04STOP\x10\x01\x12\x08\n\x04SLOW\x10\x02\x12\n\n\x06MEDIUM\x10\x03\x12\x08\n\x04\x46\x41ST\x10\x04\x12\x0b\n\x07REVERSE\x10\x05\x32P\n\x08RFBridge\x12\x44\n\x0bSendCommand\x12\x18.rfbridge.CommandRequest\x1a\x19.rfbridge.CommandResponse\"\x00\x62\x06proto3')
 )
 
 _COMMAND = _descriptor.EnumDescriptor(
@@ -56,8 +56,8 @@ _COMMAND = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=101,
-  serialized_end=176,
+  serialized_start=116,
+  serialized_end=191,
 )
 _sym_db.RegisterEnumDescriptor(_COMMAND)
 
@@ -85,6 +85,13 @@ _COMMANDREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='times', full_name='rfbridge.CommandRequest.times', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -98,7 +105,7 @@ _COMMANDREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=28,
-  serialized_end=80,
+  serialized_end=95,
 )
 
 
@@ -121,8 +128,8 @@ _COMMANDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=82,
-  serialized_end=99,
+  serialized_start=97,
+  serialized_end=114,
 )
 
 _COMMANDREQUEST.fields_by_name['command'].enum_type = _COMMAND
@@ -153,8 +160,8 @@ _RFBRIDGE = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=178,
-  serialized_end=258,
+  serialized_start=193,
+  serialized_end=273,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendCommand',

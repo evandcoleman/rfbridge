@@ -17,6 +17,7 @@ enum Command {
 
 message CommandRequest {
   Command command = 1;
+  int32 times = 2;
 }
 
 message CommandResponse {

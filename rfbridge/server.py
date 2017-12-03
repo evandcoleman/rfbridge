@@ -32,7 +32,10 @@ class Server(rfbridge_pb2_grpc.RFBridgeServicer):
         response = rfbridge_pb2.CommandResponse()
 
         name = rfbridge_pb2.Command.Name(request.command)
-        self.tx.xmit(cmd=name)
+        if request.times != 0:
+            self.tx.xmit(cmd=name, times=request.times)
+        else:
+            self.tx.xmit(cmd=name)
 
         return response
 
