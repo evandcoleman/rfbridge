@@ -93,9 +93,9 @@ def main(args):
     device = devices.devices[args.device_id]
     tx = Transmitter(config=device)
 
-    if args.bridge:
+    if args.bridge_name is not None:
         _logger.info("Advertising service...")
-        advertiser = Advertise(name=args.bridge, device_type='fan')
+        advertiser = Advertise(name=args.bridge_name, device_type='fan')
         advertiser.start()
         _logger.info("Advertised at port: " + str(advertiser.port))
         server = Server(port=advertiser.port, sensor=Sensor(), tx=tx)
